@@ -31,8 +31,17 @@
                 </div>
                 <!-- Navbar Right Side -->
                 <div class="navbar-nav">
-                <a class="nav-item nav-link" href="#">Login</a>
-                <a class="nav-item nav-link" href="#">Register</a>
+                {% if user.is_authenticated %}
+                <!-- https://forum.djangoproject.com/t/showing-method-not-allowed-get-users-logout/26044/2 -->
+                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <a class="nav-item nav-link" onclick="$(this).closest('form').submit();">Logout</a>
+                </form>
+                {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                {% endif %}
+                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                 </div>
             </div>
             </div>

@@ -130,3 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #pip install crispy-bootstrap5
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+LOGIN_REDIRECT_URL = 'blog-home'
+LOGIN_URL = 'login' # to prevent 404 error page when anonymously accessing /profile. this will show the login page with option to redirect to profile page after login is successful.
+#LOGOUT_REDIRECT_URL = 'login' #anywhere you like
