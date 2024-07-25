@@ -2,7 +2,7 @@ from django.forms import BaseModelForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 
 # posts = [
@@ -47,7 +47,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): # UserPassesTestMixin must be on the left of UpdateView?
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): # UserPassesTestMixin must be on the left of UpdateView!!
     model = Post
     fields = ['title', 'content']
 
@@ -55,6 +55,16 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): # Use
         form.instance.author = self.request.user
         return super().form_valid(form)
     
+    def test_func(self) -> bool | None:
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+    
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView): # UserPassesTestMixin must be on the left of DeleteView!!
+    model = Post
+    success_url = '/'
+
     def test_func(self) -> bool | None:
         post = self.get_object()
         if self.request.user == post.author:
