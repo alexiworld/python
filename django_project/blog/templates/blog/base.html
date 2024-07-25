@@ -33,6 +33,7 @@
                 <div class="navbar-nav">
                 {% if user.is_authenticated %}
                 <!-- https://forum.djangoproject.com/t/showing-method-not-allowed-get-users-logout/26044/2 -->
+                <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
