@@ -1,5 +1,5 @@
 from django.forms import BaseModelForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
@@ -47,13 +47,19 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): # UserPassesTestMixin must be on the left of UpdateView?
     model = Post
     fields = ['title', 'content']
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         form.instance.author = self.request.user
         return super().form_valid(form)
+    
+    def test_func(self) -> bool | None:
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
 def about(request):
     #return HttpResponse('<h1>Blog About</h1>')
