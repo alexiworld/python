@@ -35,6 +35,7 @@ class PostListView(ListView):
     # i.e. to match the one used in home function (see context variable with 'posts' above).
     context_object_name = 'posts' 
     ordering = ['-date_posted']
+    paginate_by = 2
 
 class PostDetailView(DetailView):
     model = Post
