@@ -1,3 +1,4 @@
+from django.forms import BaseModelForm
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView
@@ -40,6 +41,10 @@ class PostDetailView(DetailView):
 class PostCreateView(CreateView):
     model = Post
     fields = ['title', 'content']
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 def about(request):
     #return HttpResponse('<h1>Blog About</h1>')
