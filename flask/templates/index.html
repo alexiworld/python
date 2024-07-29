@@ -5,11 +5,8 @@
     </head>
     <body>
         <h1>Home Page!</h1>
-        <p>{{content}}</p>
-        {% for x in range (10)%}
-            {% if x % 2 == 1%}
-                <p>{{ x }}</p>
-            {% endif %}
+        {% for x in content %}
+            <p>{{ x }}</p>
         {% endfor %}
     </body>
 </html>
