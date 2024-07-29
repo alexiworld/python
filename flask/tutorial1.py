@@ -6,9 +6,5 @@ app = Flask(__name__)
 def home(name):
     return render_template("index.html", content=name)
 
-@app.route("/admin")
-def admin():
-    return redirect(url_for("user", name="Admin!"))
-
 if __name__ == "__main__":
     app.run()
