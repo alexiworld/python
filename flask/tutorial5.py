@@ -7,7 +7,7 @@ app.permanent_session_lifetime = timedelta(minutes=30) #days=5
 
 @app.route("/")
 def home():
-    return render_template("tutorial5/index.html")
+    return render_template("tutorial2/index.html")
 
 @app.route("/login", methods=["POST", "GET"])
 def login():

@@ -20,7 +20,7 @@ class users(db.Model):
 
 @app.route("/")
 def home():
-    return render_template("tutorial5/index.html")
+    return render_template("tutorial2/index.html")
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
