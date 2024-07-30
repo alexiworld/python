@@ -1,0 +1,8 @@
+{% extends 'tutorial10/base.html' %}
+{% block title %}
+Home Page
+{% endblock %}
+{% block content %}
+<h1>Home Page</h1>
+<img src="{{ url_for('static', filename='images/dog.jpg' )}}"/>
+{% endblock %}

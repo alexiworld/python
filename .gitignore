@@ -1,5 +1,6 @@
-django_project/__pycache__
+django/__pycache__
+flask/__pycache__
 blog/__pycache__
 django_env
-django_project/media/default.jpg
-django_project/**/migrations
+django/media/default.jpg
+django/**/migrations
