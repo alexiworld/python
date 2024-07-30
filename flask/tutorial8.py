@@ -22,6 +22,15 @@ class users(db.Model):
 def home():
     return render_template("tutorial2/index.html")
 
+@app.route("/view")
+def view():
+    _id = request.args.get("d")
+    print(f"AAAA:{_id}")
+    users.query.filter_by(_id=_id).delete()
+    db.session.commit()
+
+    return render_template("tutorial8/view.html", values=users.query.all())
+
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
