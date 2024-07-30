@@ -9,4 +9,4 @@ def home():
 
 @blueprint.route('/test')
 def test():
-    return "<h1>BP Test</h1>";
+    return "<h1>BP Test</h1>"
