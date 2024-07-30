@@ -1,5 +1,6 @@
 django/__pycache__
 flask/__pycache__
+flask/admin/__pycache__
 blog/__pycache__
 django_env
 django/media/default.jpg
