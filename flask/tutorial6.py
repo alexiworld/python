@@ -15,9 +15,11 @@ def login():
         user = request.form["nm"]
         session.permanent = True # required for permanent_session_lifetime to work
         session["user"] = user
+        flash("Login Successful!")
         return redirect(url_for("user"))
     else:
         if "user" in session:
+            flash("Already logged in!")
             return redirect(url_for("user")) 
         return render_template("tutorial6/login.html")
 
@@ -27,6 +29,7 @@ def user():
         user = session["user"]
         return render_template("tutorial6/user.html", user=user)
     else:
+        flash("You are not logged in!")
         return redirect(url_for("login"))
     
 @app.route("/logout")
@@ -34,6 +37,8 @@ def logout():
     if "user" in session:
         user = session["user"]
         flash(f"You have been successfully logged out, {user}!", "info")
+    else:
+        flash(f"You have been successfully logged out!", "info")
     session.pop("user", None)
     return redirect(url_for("login"))
 
